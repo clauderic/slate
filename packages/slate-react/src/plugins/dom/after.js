@@ -8,6 +8,7 @@ import { IS_IOS, IS_IE, IS_EDGE } from 'slate-dev-environment'
 import cloneFragment from '../../utils/clone-fragment'
 import getEventTransfer from '../../utils/get-event-transfer'
 import setEventTransfer from '../../utils/set-event-transfer'
+import SELECTORS from '../../constants/selectors'
 
 /**
  * Debug.
@@ -436,6 +437,7 @@ function AfterPlugin(options = {}) {
     const { value } = editor
     const { document, selection } = value
     const { start } = selection
+    const hasVoidParent = document.hasVoidParent(start.path, editor)
 
     const selectedBlock = document.getClosestBlock(start.path)
     const isRtl =

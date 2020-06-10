@@ -131,18 +131,6 @@ class Editor {
     return controller
   }
 
-  fastInsertText(path, offset, text, marks) {
-    this.value = this.value.insertText(path, offset, text, marks)
-
-    // If we're not already, queue the flushing process on the next tick.
-    if (!this.tmp.flushing) {
-      this.tmp.flushing = true
-      Promise.resolve().then(() => this.flush())
-    }
-
-    return this.controller
-  }
-
   /**
    * Flush the editor's current change.
    *

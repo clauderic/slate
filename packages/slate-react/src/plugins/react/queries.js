@@ -64,7 +64,7 @@ function QueriesPlugin() {
    */
 
   function findDOMPoint(editor, point) {
-    const el = findDOMNode(editor, point.path)
+    const el = editor.findDOMNode(point.path)
     let start = 0
 
     if (!el) {
@@ -110,8 +110,8 @@ function QueriesPlugin() {
 
   function findDOMRange(editor, range) {
     const { anchor, focus, isBackward, isCollapsed } = range
-    const domAnchor = findDOMPoint(editor, anchor)
-    const domFocus = isCollapsed ? domAnchor : findDOMPoint(editor, focus)
+    const domAnchor = editor.findDOMPoint(anchor)
+    const domFocus = isCollapsed ? domAnchor : editor.findDOMPoint(focus)
 
     if (!domAnchor || !domFocus) {
       return null
@@ -135,7 +135,7 @@ function QueriesPlugin() {
    */
 
   function findNode(editor, element) {
-    const path = findPath(editor, element)
+    const path = editor.findPath(element)
 
     if (!path) {
       return null
@@ -165,7 +165,7 @@ function QueriesPlugin() {
 
     const { value } = editor
     const { document } = value
-    const path = findPath(editor, event.target)
+    const path = editor.findPath(event.target)
     if (!path) return null
 
     const node = document.getNode(path)
@@ -220,7 +220,7 @@ function QueriesPlugin() {
     }
 
     // Resolve a Slate range from the DOM range.
-    const range = findRange(editor, native)
+    const range = editor.findRange(native)
     return range
   }
 
@@ -242,19 +242,13 @@ function QueriesPlugin() {
       nodeElement = nodeElement.closest(SELECTORS.KEY)
     }
 
-    const key =
-      nodeElement == null ? null : nodeElement.getAttribute(DATA_ATTRS.KEY)
-
-    if (!nodeElement || !key) {
+    if (!nodeElement || !nodeElement.getAttribute(DATA_ATTRS.KEY)) {
       return null
     }
 
     if (nodeElement === content.ref.current) {
       return PathUtils.create([])
     }
-
-    const docPath = editor.value.document.getPath(key)
-    if (docPath) return docPath
 
     const search = (instance, p) => {
       if (nodeElement === instance) {
@@ -376,7 +370,7 @@ function QueriesPlugin() {
     // COMPAT: If someone is clicking from one Slate editor into another, the
     // select event fires twice, once for the old editor's `element` first, and
     // then afterwards for the correct `element`. (2017/03/03)
-    const path = findPath(editor, textNode)
+    const path = editor.findPath(textNode)
 
     if (!path) {
       return null
@@ -427,10 +421,10 @@ function QueriesPlugin() {
       isCollapsed,
     } = domRange
     const { value } = editor
-    const anchor = findPoint(editor, anchorNode, anchorOffset)
+    const anchor = editor.findPoint(anchorNode, anchorOffset)
     const focus = isCollapsed
       ? anchor
-      : findPoint(editor, focusNode, focusOffset)
+      : editor.findPoint(focusNode, focusOffset)
 
     if (!anchor || !focus) {
       return null
@@ -463,7 +457,7 @@ function QueriesPlugin() {
     }
 
     // Otherwise, determine the Slate selection from the native one.
-    let range = findRange(editor, domSelection)
+    let range = editor.findRange(domSelection)
 
     if (!range) {
       return null

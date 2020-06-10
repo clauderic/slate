@@ -18,7 +18,7 @@ const Commands = {}
 
 Commands.save = (editor, operation) => {
   // Disabled for performance (saves ~1-5ms), since we don't use slate's undo code at all right now
-  if (Date.now() > 0) return
+  return
   const { operations, value } = editor
   const { data } = value
   let { save, merge } = editor.tmp

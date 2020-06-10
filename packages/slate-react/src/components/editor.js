@@ -34,7 +34,7 @@ class Editor extends React.Component {
    * @type {Object}
    */
 
-  static __propTypes = {
+  static propTypes = {
     autoCorrect: Types.bool,
     autoFocus: Types.bool,
     className: Types.string,
@@ -182,7 +182,7 @@ class Editor extends React.Component {
       onContextMenu,
     } = this.props
 
-    const domProps = omit(this.props, Object.keys(Editor.__propTypes))
+    const domProps = omit(this.props, Object.keys(Editor.propTypes))
 
     const children = (
       <Content

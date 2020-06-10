@@ -494,13 +494,11 @@ class Value extends Record(DEFAULTS) {
 
     value = value.mapPoints(point => {
       if (point.key === node.key && point.offset >= offset) {
-        return point.setOffset(
-          Math.min(node.text.length, point.offset + text.length)
-        )
+        return point.setOffset(point.offset + text.length)
       } else {
         return point
       }
-    }, true)
+    })
 
     return value
   }
@@ -828,17 +826,14 @@ class Value extends Record(DEFAULTS) {
    * @return {Value}
    */
 
-  mapRanges(iterator, skipNormalize) {
+  mapRanges(iterator) {
     let value = this
-    const { document, selection: oldSelection, annotations } = value
+    const { document, selection, annotations } = value
 
-    let newSelection = oldSelection.isSet
-      ? iterator(oldSelection)
-      : oldSelection
-    if (!newSelection) newSelection = oldSelection.unset()
-    if (newSelection !== oldSelection && !skipNormalize)
-      newSelection = document.createSelection(newSelection)
-    value = value.set('selection', newSelection)
+    let sel = selection.isSet ? iterator(selection) : selection
+    if (!sel) sel = selection.unset()
+    if (sel !== selection) sel = document.createSelection(sel)
+    value = value.set('selection', sel)
 
     let anns = annotations.map(annotation => {
       let n = annotation.isSet ? iterator(annotation) : annotation
@@ -851,8 +846,8 @@ class Value extends Record(DEFAULTS) {
     return value
   }
 
-  mapPoints(iterator, skipNormalize) {
-    return this.mapRanges(range => range.updatePoints(iterator), skipNormalize)
+  mapPoints(iterator) {
+    return this.mapRanges(range => range.updatePoints(iterator))
   }
 
   /**
