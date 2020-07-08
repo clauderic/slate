@@ -154,7 +154,7 @@ function CompositionManager(editor) {
    *
    * We don't want to apply the `diff` at the time it is created because we
    * may be in a composition. There are a few things that trigger the applying
-   * of the saved diff. Sometimeson its own and sometimes immediately before
+   * of the saved diff. Sometimes on its own and sometimes immediately before
    * doing something else with the Editor.
    *
    * - `onCompositionEnd` event
@@ -178,6 +178,14 @@ function CompositionManager(editor) {
     entire = document.resolveRange(entire)
 
     editor.insertTextAtRange(entire, diff.insertText)
+
+    // Determine new cursor offset
+    const offset = diff.insertText
+      ? diff.end + diff.insertText.length
+      : diff.end - (diff.end - diff.start)
+
+    // Move cursor to new position
+    editor.moveTo(diff.path, offset)
   }
 
   /**
@@ -356,7 +364,15 @@ function CompositionManager(editor) {
     const firstMutation = mutations[0]
 
     if (firstMutation.type === 'characterData') {
+      // Handle text update
       resolveDOMNode(firstMutation.target.parentNode)
+
+      // Apply diff asynchronously
+      // TODO: Ideally this would be debounced on a short timeout,
+      // as this approach will is probably inefficient
+      renderSync(editor, () => {
+        applyDiff()
+      })
     } else if (firstMutation.type === 'childList') {
       if (firstMutation.removedNodes.length > 0) {
         if (mutations.length === 1) {
