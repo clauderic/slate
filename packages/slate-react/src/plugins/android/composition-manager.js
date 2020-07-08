@@ -177,15 +177,23 @@ function CompositionManager(editor) {
 
     entire = document.resolveRange(entire)
 
-    editor.insertTextAtRange(entire, diff.insertText)
-
     // Determine new cursor offset
-    const offset = diff.insertText
-      ? diff.end + diff.insertText.length
-      : diff.end - (diff.end - diff.start)
+    if (diff.insertText) {
+      const offset = diff.end + diff.insertText.length
 
-    // Move cursor to new position
-    editor.moveTo(diff.path, offset)
+      editor
+        .insertTextAtRange(entire, diff.insertText)
+        // Move cursor to new position
+        .moveTo(diff.path, offset)
+        .restoreDOM()
+    } else {
+      const deletionLength = diff.end - diff.start
+      const offset = diff.end - deletionLength
+
+      editor
+        .deleteBackwardAtRange(entire, deletionLength)
+        .moveTo(diff.path, offset)
+    }
   }
 
   /**
@@ -443,7 +451,14 @@ function CompositionManager(editor) {
 
   function removeNode(domNode) {
     debug('removeNode')
-    if (domNode.nodeType !== window.Node.ELEMENT_NODE) return
+
+    if (domNode.nodeType !== window.Node.ELEMENT_NODE) {
+      renderSync(editor, () => {
+        editor.deleteBackward().restoreDOM()
+      })
+      return
+    }
+
     const { value } = editor
     const { document, selection } = value
     const node = editor.findNode(domNode)
