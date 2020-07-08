@@ -107,6 +107,9 @@ class RichTextExample extends React.Component {
           renderBlock={this.renderBlock}
           renderMark={this.renderMark}
         />
+        <pre>
+          {JSON.stringify(this.state.value.toJS())}
+        </pre>
       </div>
     )
   }
@@ -221,6 +224,7 @@ class RichTextExample extends React.Component {
    */
 
   onChange = ({ value }) => {
+    console.log(value.toJS(), 'onChange');
     this.setState({ value })
   }
 
@@ -234,6 +238,8 @@ class RichTextExample extends React.Component {
 
   onKeyDown = (event, editor, next) => {
     let mark
+
+    console.log(editor.value.toJS());
 
     if (isBoldHotkey(event)) {
       mark = 'bold'
