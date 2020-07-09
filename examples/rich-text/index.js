@@ -99,7 +99,7 @@ class RichTextExample extends React.Component {
         <Editor
           spellCheck
           autoFocus
-          placeholder="Enter some rich text..."
+          autoComplete="false"
           ref={this.ref}
           value={this.state.value}
           onChange={this.onChange}
@@ -108,7 +108,7 @@ class RichTextExample extends React.Component {
           renderMark={this.renderMark}
         />
         <pre>
-          {JSON.stringify(this.state.value.toJS())}
+          {JSON.stringify(this.state.value.document.nodes.toJS(), null, 2)}
         </pre>
       </div>
     )
