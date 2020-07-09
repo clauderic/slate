@@ -1,15 +1,15 @@
 {
   "name": "@clauderic/slate-base64-serializer",
   "description": "A Base64 serializer for Slate editors.",
-  "version": "0.2.112",
+  "version": "0.2.113",
   "license": "MIT",
-  "repository" : {
-    "type" : "git",
+  "repository": {
+    "type": "git",
     "url": "ssh://git@github.com/clauderic/slate.git",
     "directory": "packages/slate-base64-serializer"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/"
   },
   "main": "lib/slate-base64-serializer.js",
   "module": "lib/slate-base64-serializer.es.js",

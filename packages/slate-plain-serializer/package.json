@@ -1,15 +1,15 @@
 {
   "name": "@clauderic/slate-plain-serializer",
   "description": "A plain text serializer for Slate editors.",
-  "version": "0.7.11",
+  "version": "0.7.12",
   "license": "MIT",
-  "repository" : {
-    "type" : "git",
+  "repository": {
+    "type": "git",
     "url": "ssh://git@github.com/clauderic/slate.git",
     "directory": "packages/slate-plain-serializer"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/"
   },
   "main": "lib/slate-plain-serializer.js",
   "module": "lib/slate-plain-serializer.es.js",

@@ -1,15 +1,15 @@
 {
   "name": "@clauderic/slate-dev-benchmark",
   "description": "INTERNAL: A development-only benchmark tool for Slate's core.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
-  "repository" : {
-    "type" : "git",
+  "repository": {
+    "type": "git",
     "url": "ssh://git@github.com/clauderic/slate.git",
     "directory": "packages/slate-dev-benchmark"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/"
   },
   "main": "src/index.js",
   "devDependencies": {
