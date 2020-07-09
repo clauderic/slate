@@ -2,5 +2,11 @@
   "lerna": "2.7.1",
   "version": "independent",
   "npmClient": "yarn",
-  "useWorkspaces": true
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "registry": "https://npm.pkg.github.com"
+    }
+  },
+  "packages": ["packages/*"]
 }
