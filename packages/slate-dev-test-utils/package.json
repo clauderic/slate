@@ -1,5 +1,5 @@
 {
-  "name": "@clauderic/slate-dev-test-utils",
+  "name": "@slate-fork/slate-dev-test-utils",
   "description": "INTERNAL: A set of utils for Slate's core tests.",
   "version": "0.0.2",
   "license": "MIT",
@@ -7,9 +7,6 @@
     "type": "git",
     "url": "ssh://git@github.com/clauderic/slate.git",
     "directory": "packages/slate-dev-test-utils"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "main": "src/index.js",
   "files": [

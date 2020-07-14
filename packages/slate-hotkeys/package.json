@@ -1,5 +1,5 @@
 {
-  "name": "@clauderic/slate-hotkeys",
+  "name": "@slate-fork/slate-hotkeys",
   "description": "A set of function to detect common keypresses in a platform-agnostic way",
   "version": "0.2.10",
   "license": "MIT",
@@ -7,9 +7,6 @@
     "type": "git",
     "url": "ssh://git@github.com/clauderic/slate.git",
     "directory": "packages/slate-hotkeys"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "main": "lib/slate-hotkeys.js",
   "module": "lib/slate-hotkeys.es.js",

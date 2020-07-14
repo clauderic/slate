@@ -18,7 +18,7 @@ import { startCase } from 'lodash'
  */
 
 function configure(pkg, env, target) {
-  const packageName = pkg.name.replace('@clauderic/', '')
+  const packageName = pkg.name.replace('@slate-fork/', '')
   const isProd = env === 'production'
   const isUmd = target === 'umd'
   const isModule = target === 'module'

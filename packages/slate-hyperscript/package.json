@@ -1,5 +1,5 @@
 {
-  "name": "@clauderic/slate-hyperscript",
+  "name": "@slate-fork/slate-hyperscript",
   "description": "A hyperscript helper for creating Slate documents.",
   "version": "0.13.10",
   "license": "MIT",
@@ -7,9 +7,6 @@
     "type": "git",
     "url": "ssh://git@github.com/clauderic/slate.git",
     "directory": "packages/slate-hyperscript"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "main": "lib/slate-hyperscript.js",
   "module": "lib/slate-hyperscript.es.js",

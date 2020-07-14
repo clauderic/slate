@@ -1,5 +1,5 @@
 {
-  "name": "@clauderic/slate-react-placeholder",
+  "name": "@slate-fork/slate-react-placeholder",
   "description": "A Slate plugin to render a placeholder with React.",
   "version": "0.2.10",
   "license": "MIT",
@@ -7,9 +7,6 @@
     "type": "git",
     "url": "ssh://git@github.com/clauderic/slate.git",
     "directory": "packages/slate-react-placeholder"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "main": "lib/slate-react-placeholder.js",
   "module": "lib/slate-react-placeholder.es.js",

@@ -1,5 +1,5 @@
 {
-  "name": "@clauderic/slate-react",
+  "name": "@slate-fork/slate-react",
   "description": "A set of React components for building completely customizable rich-text editors.",
   "version": "0.22.11",
   "license": "MIT",
@@ -7,9 +7,6 @@
     "type": "git",
     "url": "ssh://git@github.com/clauderic/slate.git",
     "directory": "packages/slate-react"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "main": "lib/slate-react.js",
   "module": "lib/slate-react.es.js",

@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@clauderic/slate-packages",
+  "name": "@slate-fork/slate-packages",
   "workspaces": [
     "packages/*"
   ],

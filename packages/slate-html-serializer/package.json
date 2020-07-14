@@ -1,5 +1,5 @@
 {
-  "name": "@clauderic/slate-html-serializer",
+  "name": "@slate-fork/slate-html-serializer",
   "description": "An HTML serializer for Slate editors.",
   "version": "0.8.12",
   "license": "MIT",
@@ -7,9 +7,6 @@
     "type": "git",
     "url": "ssh://git@github.com/clauderic/slate.git",
     "directory": "packages/slate-html-serializer"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "main": "lib/slate-html-serializer.js",
   "module": "lib/slate-html-serializer.es.js",

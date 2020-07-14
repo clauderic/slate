@@ -1,5 +1,5 @@
 {
-  "name": "@clauderic/slate-dev-environment",
+  "name": "@slate-fork/slate-dev-environment",
   "description": "INTERNAL: A set of environment-related constants for Slate's core.",
   "version": "0.2.3",
   "license": "MIT",
@@ -7,9 +7,6 @@
     "type": "git",
     "url": "ssh://git@github.com/clauderic/slate.git",
     "directory": "packages/slate-dev-environment"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "main": "lib/slate-dev-environment.js",
   "module": "lib/slate-dev-environment.es.js",
