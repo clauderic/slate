@@ -25,7 +25,7 @@ function DOMPlugin(options = {}) {
     ? [AndroidPlugin(options), NoopPlugin(options)]
     : []
 
-  return [...androidPlugins, beforePlugin, ...plugins, afterPlugin]
+  return [...plugins, ...androidPlugins, beforePlugin, afterPlugin]
 }
 
 /**
