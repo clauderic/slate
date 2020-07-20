@@ -108,12 +108,34 @@ function AndroidPlugin({ editor }) {
     observer.clearDiff()
   }
 
+  /**
+   * handle `onFocus`
+   *
+   * @param {Event} event
+   */
+
+  function onFocus() {
+    editor.focus()
+  }
+
+  /**
+   * handle `onFocus`
+   *
+   * @param {Event} event
+   */
+
+  function onBlur() {
+    editor.blur()
+  }
+
   return {
+    onBlur,
     onComponentDidMount,
     onComponentDidUpdate,
     onComponentWillUnmount,
     onCompositionEnd,
     onCompositionStart,
+    onFocus,
     onRender,
     onSelect,
   }
