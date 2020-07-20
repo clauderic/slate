@@ -611,6 +611,8 @@ function CompositionManager(editor) {
         applyDiff()
         editor.select(range)
         clearAction()
+      } else {
+        editor.select(range)
       }
 
       last.range = range
