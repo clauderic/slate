@@ -98,7 +98,6 @@ class RichTextExample extends React.Component {
         </Toolbar>
         <Editor
           spellCheck
-          autoFocus
           autoComplete="false"
           ref={this.ref}
           value={this.state.value}
@@ -110,6 +109,7 @@ class RichTextExample extends React.Component {
         <pre>
           {JSON.stringify(this.state.value.document.nodes.toJS(), null, 2)}
         </pre>
+        <pre>{JSON.stringify(this.state.value.selection.toJS(), null, 2)}</pre>
       </div>
     )
   }
