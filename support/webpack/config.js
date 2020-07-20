@@ -25,6 +25,19 @@ const config = {
     path: path.resolve(__dirname, '../../build'),
     filename: '[name]-[hash].js',
   },
+  resolve: {
+    alias: {
+      slate: path.resolve(__dirname, '../../packages/slate'),
+      'slate-react': path.resolve(__dirname, '../../packages/slate-react'),
+      'slate-hotkeys': path.resolve(__dirname, '../../packages/slate-hotkeys'),
+      'slate-react-placeholder': path.resolve(__dirname, '../../packages/slate-react-placeholder'),
+      'slate-prop-types': path.resolve(__dirname, '../../packages/slate-prop-types'),
+      'slate-dev-environment': path.resolve(__dirname, '../../packages/slate-dev-environment'),
+      'slate-html-serializer': path.resolve(__dirname, '../../packages/slate-html-serializer'),
+      'slate-base64-serializer': path.resolve(__dirname, '../../packages/slate-base64-serializer'),
+      'slate-plain-serializer': path.resolve(__dirname, '../../packages/slate-plain-serializer'),
+    },
+  },
   devtool: IS_PROD ? 'source-map' : 'inline-source-map',
   devServer: {
     contentBase: './examples',
