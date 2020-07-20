@@ -1,7 +1,7 @@
 {
   "name": "@slate-fork/slate-hotkeys",
   "description": "A set of function to detect common keypresses in a platform-agnostic way",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "license": "MIT",
   "repository": {
     "type": "git",
