@@ -2,7 +2,7 @@
 
 import h from '../../../helpers/h'
 
-import { Mark } from 'slate'
+import { Mark } from '@slate-fork/slate'
 
 export default function(editor) {
   editor.addMark(

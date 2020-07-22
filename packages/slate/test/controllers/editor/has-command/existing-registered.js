@@ -1,6 +1,6 @@
 /** @jsx h */
 
-import { Editor } from 'slate'
+import { Editor } from '@slate-fork/slate'
 
 export const input = new Editor().registerCommand('customCommand')
 

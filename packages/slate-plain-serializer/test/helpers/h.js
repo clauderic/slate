@@ -1,4 +1,4 @@
-import { createHyperscript } from 'slate-hyperscript'
+import { createHyperscript } from '@slate-fork/slate-hyperscript'
 
 /**
  * Define a hyperscript.

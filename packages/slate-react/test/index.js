@@ -3,8 +3,8 @@ import clean from './helpers/clean'
 import React from 'react'
 import ReactDOM from 'react-dom/server'
 import ShallowRenderer from 'react-test-renderer/shallow'
-import { Editor } from 'slate-react'
-import { fixtures } from 'slate-dev-test-utils'
+import { Editor } from '@slate-fork/slate-react'
+import { fixtures } from '@slate-fork/slate-dev-test-utils'
 import { JSDOM } from 'jsdom'
 
 describe('slate-react', () => {

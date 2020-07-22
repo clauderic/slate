@@ -1,7 +1,7 @@
 # `Mark`
 
 ```js
-import { Mark } from 'slate'
+import { Mark } from '@slate-fork/slate'
 ```
 
 A formatting mark that can be associated with characters. Marks are how Slate represents rich formatting like **bold** or _italic_.

@@ -1,10 +1,10 @@
 import Debug from 'debug'
 import ImmutableTypes from 'react-immutable-proptypes'
 import React from 'react'
-import SlateTypes from 'slate-prop-types'
+import SlateTypes from '@slate-fork/slate-prop-types'
 import warning from 'tiny-warning'
 import Types from 'prop-types'
-import { PathUtils } from 'slate'
+import { PathUtils } from '@slate-fork/slate'
 
 import Void from './void'
 import Text from './text'

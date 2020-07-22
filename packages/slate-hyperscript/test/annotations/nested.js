@@ -1,6 +1,6 @@
 /** @jsx h */
 
-import { createHyperscript } from 'slate-hyperscript'
+import { createHyperscript } from '@slate-fork/slate-hyperscript'
 
 const h = createHyperscript({
   blocks: {

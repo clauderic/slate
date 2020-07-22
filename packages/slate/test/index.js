@@ -1,6 +1,6 @@
 import assert from 'assert'
-import { fixtures } from 'slate-dev-test-utils'
-import { Node, Editor, Value } from 'slate'
+import { fixtures } from '@slate-fork/slate-dev-test-utils'
+import { Node, Editor, Value } from '@slate-fork/slate'
 import { List } from 'immutable'
 
 const plugins = [

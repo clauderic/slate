@@ -1,5 +1,5 @@
-import { Editor, getEventTransfer } from 'slate-react'
-import { Block, Value } from 'slate'
+import { Editor, getEventTransfer } from '@slate-fork/slate-react'
+import { Block, Value } from '@slate-fork/slate'
 
 import React from 'react'
 import initialValueAsJson from './value.json'

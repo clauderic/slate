@@ -1,7 +1,7 @@
 import getWindow from 'get-window'
 import invariant from 'tiny-invariant'
 import warning from 'tiny-warning'
-import { Value } from 'slate'
+import { Value } from '@slate-fork/slate'
 
 import OffsetKey from './offset-key'
 import DATA_ATTRS from '../constants/data-attributes'

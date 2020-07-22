@@ -23,17 +23,17 @@
     "is-plain-object": "^2.0.4"
   },
   "peerDependencies": {
-    "slate": ">=0.47.0"
+    "@slate-fork/slate": ">=0.47.0"
   },
   "devDependencies": {
     "mocha": "^2.5.3",
-    "slate": "^0.47.9"
+    "@slate-fork/slate": "^0.47.9"
   },
   "scripts": {
     "clean": "rm -rf ./dist ./lib ./node_modules"
   },
   "umdGlobals": {
-    "slate": "Slate"
+    "@slate-fork/slate": "Slate"
   },
   "keywords": [
     "hyperscript",

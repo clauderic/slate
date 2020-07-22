@@ -1,7 +1,7 @@
 # `<Editor>`
 
 ```js
-import { Editor } from 'slate'
+import { Editor } from '@slate-fork/slate'
 ```
 
 The top-level controller that holds a [`Value`](./value.md) over time, and contains all of the plugins that determine the editor's behavior.

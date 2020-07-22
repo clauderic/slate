@@ -1,5 +1,5 @@
 import getWindow from 'get-window'
-import { PathUtils } from 'slate'
+import { PathUtils } from '@slate-fork/slate'
 
 import DATA_ATTRS from '../../constants/data-attributes'
 import SELECTORS from '../../constants/selectors'

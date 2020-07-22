@@ -1,7 +1,7 @@
 /** @jsx h */
 
 import h from '../../../helpers/h'
-import { PathUtils } from 'slate'
+import { PathUtils } from '@slate-fork/slate'
 
 export const input = (
   <value>

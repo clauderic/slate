@@ -1,6 +1,6 @@
 /** @jsx h */
 
-import h from 'slate-hyperscript'
+import h from '@slate-fork/slate-hyperscript'
 
 export const input = <inline type="link">word</inline>
 

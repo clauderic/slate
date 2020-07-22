@@ -1,5 +1,5 @@
-import { Editor } from 'slate-react'
-import { Value } from 'slate'
+import { Editor } from '@slate-fork/slate-react'
+import { Value } from '@slate-fork/slate'
 
 import React from 'react'
 import ReactDOM from 'react-dom'

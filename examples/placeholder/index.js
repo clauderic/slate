@@ -1,6 +1,6 @@
-import { Editor } from 'slate-react'
-import PlaceholderPlugin from 'slate-react-placeholder'
-import { Value } from 'slate'
+import { Editor } from '@slate-fork/slate-react'
+import PlaceholderPlugin from '@slate-fork/slate-react-placeholder'
+import { Value } from '@slate-fork/slate'
 import initialValue from './value.json'
 
 import React from 'react'

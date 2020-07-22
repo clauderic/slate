@@ -1,7 +1,7 @@
 # `Point`
 
 ```js
-import { Point } from 'slate'
+import { Point } from '@slate-fork/slate'
 ```
 
 A point in a Slate [`Document`](./document.md). Points in Slate are inspired by the [DOM Range API](https://developer.mozilla.org/en-US/docs/Web/API/Range), with terms like "offset".

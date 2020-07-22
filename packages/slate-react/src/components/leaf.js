@@ -1,8 +1,8 @@
 import React from 'react'
 import Types from 'prop-types'
-import SlateTypes from 'slate-prop-types'
+import SlateTypes from '@slate-fork/slate-prop-types'
 import ImmutableTypes from 'react-immutable-proptypes'
-import { IS_FIREFOX } from 'slate-dev-environment'
+import { IS_FIREFOX } from '@slate-fork/slate-dev-environment'
 
 import OffsetKey from '../utils/offset-key'
 import DATA_ATTRS from '../constants/data-attributes'

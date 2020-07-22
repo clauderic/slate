@@ -17,7 +17,7 @@
     "lib/"
   ],
   "peerDependencies": {
-    "slate": ">=0.35.0"
+    "@slate-fork/slate": ">=0.35.0"
   },
   "scripts": {
     "clean": "rm -rf ./dist ./lib ./node_modules"

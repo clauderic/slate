@@ -80,14 +80,14 @@
     "webpack-dev-server": "^2.11.1"
   },
   "peerDependencies": {
-    "slate": "*",
-    "slate-dev-benchmark": "*",
-    "slate-dev-environment": "*",
-    "slate-dev-test-utils": "*",
-    "slate-html-serializer": "*",
-    "slate-plain-serializer": "*",
-    "slate-react": "*",
-    "slate-react-placeholder": "*"
+    "@slate-fork/slate": "*",
+    "@slate-fork/slate-dev-benchmark": "*",
+    "@slate-fork/slate-dev-environment": "*",
+    "@slate-fork/slate-dev-test-utils": "*",
+    "@slate-fork/slate-html-serializer": "*",
+    "@slate-fork/slate-plain-serializer": "*",
+    "@slate-fork/slate-react": "*",
+    "@slate-fork/slate-react-placeholder": "*"
   },
   "scripts": {
     "benchmark": "cross-env COMPARE=compare node --expose-gc ./tmp/benchmark/index.js",

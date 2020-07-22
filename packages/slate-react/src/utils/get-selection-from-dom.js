@@ -1,5 +1,5 @@
 import warning from 'tiny-warning'
-import { PathUtils } from 'slate'
+import { PathUtils } from '@slate-fork/slate'
 
 import findRange from './find-range'
 

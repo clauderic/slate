@@ -1,5 +1,5 @@
-import { Editor } from 'slate-react'
-import { Value } from 'slate'
+import { Editor } from '@slate-fork/slate-react'
+import { Value } from '@slate-fork/slate'
 
 import Prism from 'prismjs'
 import React from 'react'

@@ -1,7 +1,7 @@
 # `Selection`
 
 ```js
-import { Selection } from 'slate'
+import { Selection } from '@slate-fork/slate'
 ```
 
 The user's current selection in a Slate [`Document`](./document.md). Selections implement the [`Range`](./range.md) interface, but also expose data about the current "focus" and the cursor current marks.

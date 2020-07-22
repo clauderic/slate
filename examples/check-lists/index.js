@@ -1,6 +1,6 @@
 import React from 'react'
-import { Editor } from 'slate-react'
-import { Value } from 'slate'
+import { Editor } from '@slate-fork/slate-react'
+import { Value } from '@slate-fork/slate'
 import { css } from 'emotion'
 
 import initialValueAsJson from './value.json'

@@ -1,4 +1,4 @@
-import { Block, Range, Text } from 'slate'
+import { Block, Range, Text } from '@slate-fork/slate'
 import safelyGetParentKeyNode from './safely-get-parent-key-node'
 import DATA_ATTRS from '../constants/data-attributes'
 

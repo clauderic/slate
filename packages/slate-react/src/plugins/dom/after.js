@@ -1,9 +1,9 @@
-import Base64 from 'slate-base64-serializer'
+import Base64 from '@slate-fork/slate-base64-serializer'
 import Debug from 'debug'
-import Hotkeys from 'slate-hotkeys'
-import Plain from 'slate-plain-serializer'
+import Hotkeys from '@slate-fork/slate-hotkeys'
+import Plain from '@slate-fork/slate-plain-serializer'
 import getWindow from 'get-window'
-import { IS_IOS, IS_IE, IS_EDGE } from 'slate-dev-environment'
+import { IS_IOS, IS_IE, IS_EDGE } from '@slate-fork/slate-dev-environment'
 
 import cloneFragment from '../../utils/clone-fragment'
 import getEventTransfer from '../../utils/get-event-transfer'

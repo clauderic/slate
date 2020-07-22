@@ -7,7 +7,7 @@ import {
   Selection,
   Text,
   Value,
-} from 'slate'
+} from '@slate-fork/slate'
 
 /**
  * Auto-incrementing ID to keep track of paired annotations.

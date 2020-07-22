@@ -1,4 +1,4 @@
-import { Node, Value } from 'slate'
+import { Node, Value } from '@slate-fork/slate'
 import { atob, btoa } from 'isomorphic-base64'
 
 /**

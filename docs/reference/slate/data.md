@@ -1,7 +1,7 @@
 # `Data`
 
 ```js
-import { Data } from 'slate'
+import { Data } from '@slate-fork/slate'
 ```
 
 Data is simply a thin wrapper around [`Immutable.Map`](https://immutable-js.github.io/immutable-js/docs/#/Map), so that you don't need to ever depend on Immutable directly, and for future compatibility.

@@ -21,19 +21,19 @@
   ],
   "peerDependencies": {
     "immutable": ">=3.8.1",
-    "slate": ">=0.46.0"
+    "@slate-fork/slate": ">=0.46.0"
   },
   "devDependencies": {
     "mocha": "^2.5.3",
-    "slate": "^0.47.9",
-    "slate-hyperscript": "^0.13.9"
+    "@slate-fork/slate": "^0.47.9",
+    "@slate-fork/slate-hyperscript": "^0.13.9"
   },
   "scripts": {
     "clean": "rm -rf ./dist ./lib ./node_modules"
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "slate": "Slate"
+    "@slate-fork/slate": "Slate"
   },
   "keywords": [
     "deserialize",

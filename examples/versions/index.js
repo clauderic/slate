@@ -1,5 +1,5 @@
-import { Value } from 'slate'
-import { Editor } from 'slate-react'
+import { Value } from '@slate-fork/slate'
+import { Editor } from '@slate-fork/slate-react'
 import React from 'react'
 import { List } from 'immutable'
 

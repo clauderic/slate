@@ -1,8 +1,8 @@
-import Html from 'slate-html-serializer'
+import Html from '@slate-fork/slate-html-serializer'
 import assert from 'assert'
 import { JSDOM } from 'jsdom'
-import { Value } from 'slate'
-import { fixtures } from 'slate-dev-test-utils'
+import { Value } from '@slate-fork/slate'
+import { fixtures } from '@slate-fork/slate-dev-test-utils'
 
 describe('slate-html-serializer', () => {
   fixtures(__dirname, 'deserialize', ({ module }) => {

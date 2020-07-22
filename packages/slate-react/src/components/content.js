@@ -9,8 +9,8 @@ import {
   IS_ANDROID,
   IS_FIREFOX,
   HAS_INPUT_EVENTS_LEVEL_2,
-} from 'slate-dev-environment'
-import Hotkeys from 'slate-hotkeys'
+} from '@slate-fork/slate-dev-environment'
+import Hotkeys from '@slate-fork/slate-hotkeys'
 
 import EVENT_HANDLERS from '../constants/event-handlers'
 import DATA_ATTRS from '../constants/data-attributes'

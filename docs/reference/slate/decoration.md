@@ -1,7 +1,7 @@
 # `Decoration`
 
 ```js
-import { Decoration } from 'slate'
+import { Decoration } from '@slate-fork/slate'
 ```
 
 A decoration is a range of the document that has a specific [`Mark`](./mark.md) dynamically applied to it based on its content or some other external state. It is not actually reflected in the document's structure itself. This can be useful for cases like syntax highlighting, or search result highlighting.

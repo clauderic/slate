@@ -1,4 +1,4 @@
-import { Node } from 'slate'
+import { Node } from '@slate-fork/slate'
 import warning from 'tiny-warning'
 
 import DATA_ATTRS from '../constants/data-attributes'

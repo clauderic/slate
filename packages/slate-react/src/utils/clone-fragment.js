@@ -1,9 +1,9 @@
-import Base64 from 'slate-base64-serializer'
-import Plain from 'slate-plain-serializer'
+import Base64 from '@slate-fork/slate-base64-serializer'
+import Plain from '@slate-fork/slate-plain-serializer'
 import getWindow from 'get-window'
 import invariant from 'tiny-invariant'
-import { IS_IE } from 'slate-dev-environment'
-import { Value } from 'slate'
+import { IS_IE } from '@slate-fork/slate-dev-environment'
+import { Value } from '@slate-fork/slate'
 
 import TRANSFER_TYPES from '../constants/transfer-types'
 import removeAllRanges from './remove-all-ranges'

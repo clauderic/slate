@@ -21,12 +21,12 @@
   ],
   "peerDependencies": {
     "react": ">=16.0.0",
-    "slate": ">=0.47.0",
-    "slate-react": ">=0.22.0"
+    "@slate-fork/slate": ">=0.47.0",
+    "@slate-fork/slate-react": ">=0.22.0"
   },
   "devDependencies": {
     "mocha": "^2.5.3",
-    "slate": "^0.47.9",
+    "@slate-fork/slate": "^0.47.9",
     "tiny-invariant": "^1.0.1"
   },
   "scripts": {
@@ -34,7 +34,7 @@
   },
   "umdGlobals": {
     "react": "React",
-    "slate": "Slate"
+    "@slate-fork/slate": "Slate"
   },
   "keywords": [
     "editor",

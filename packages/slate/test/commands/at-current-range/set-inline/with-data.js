@@ -1,7 +1,7 @@
 /** @jsx h */
 
 import h from '../../../helpers/h'
-import { Data } from 'slate'
+import { Data } from '@slate-fork/slate'
 
 export default function(editor) {
   editor.setInlines({
