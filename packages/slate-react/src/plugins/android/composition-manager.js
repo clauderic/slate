@@ -21,7 +21,8 @@ const ZERO_WIDTH_SPACE = String.fromCharCode(65279)
  * https://github.com/facebook/draft-js/commit/cda13cb8ff9c896cdb9ff832d1edeaa470d3b871
  */
 
-const flushControlled = ReactDOM.unstable_flushControlled
+const flushControlled =
+  ReactDOM.unstable_flushControlled || ReactDOM.flushControlled
 
 function renderSync(editor, fn) {
   flushControlled(() => {
