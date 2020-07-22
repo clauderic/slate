@@ -1,7 +1,7 @@
 {
   "name": "@slate-fork/slate-react",
   "description": "A set of React components for building completely customizable rich-text editors.",
-  "version": "0.22.12",
+  "version": "0.22.13",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -20,6 +20,12 @@
     "lib/"
   ],
   "dependencies": {
+    "@slate-fork/slate-base64-serializer": "^0.2.116",
+    "@slate-fork/slate-dev-environment": "^0.2.2",
+    "@slate-fork/slate-hotkeys": "^0.2.13",
+    "@slate-fork/slate-plain-serializer": "^0.7.15",
+    "@slate-fork/slate-prop-types": "^0.5.46",
+    "@slate-fork/slate-react-placeholder": "^0.2.13",
     "debug": "^3.1.0",
     "get-window": "^1.1.1",
     "is-window": "^1.0.2",
@@ -28,27 +34,21 @@
     "prop-types": "^15.5.8",
     "react-immutable-proptypes": "^2.1.0",
     "selection-is-backward": "^1.0.0",
-    "@slate-fork/slate-base64-serializer": "^0.2.112",
-    "@slate-fork/slate-dev-environment": "^0.2.2",
-    "@slate-fork/slate-hotkeys": "^0.2.9",
-    "@slate-fork/slate-plain-serializer": "^0.7.11",
-    "@slate-fork/slate-prop-types": "^0.5.42",
-    "@slate-fork/slate-react-placeholder": "^0.2.9",
     "tiny-invariant": "^1.0.1",
     "tiny-warning": "^0.0.3"
   },
   "peerDependencies": {
+    "@slate-fork/slate": ">=0.47.0",
     "immutable": ">=3.8.1 || >4.0.0-rc",
     "react": ">=16.6.0",
-    "react-dom": ">=16.6.0",
-    "@slate-fork/slate": ">=0.47.0"
+    "react-dom": ">=16.6.0"
   },
   "devDependencies": {
+    "@slate-fork/slate": "^0.47.13",
+    "@slate-fork/slate-hyperscript": "^0.13.13",
     "immutable": "^3.8.1",
     "mocha": "^2.5.3",
-    "react-test-renderer": "^16.6.3",
-    "@slate-fork/slate": "^0.47.9",
-    "@slate-fork/slate-hyperscript": "^0.13.9"
+    "react-test-renderer": "^16.6.3"
   },
   "scripts": {
     "clean": "rm -rf ./dist ./lib ./node_modules"

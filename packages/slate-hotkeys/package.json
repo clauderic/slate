@@ -1,7 +1,7 @@
 {
   "name": "@slate-fork/slate-hotkeys",
   "description": "A set of function to detect common keypresses in a platform-agnostic way",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -20,8 +20,8 @@
     "lib/"
   ],
   "dependencies": {
-    "is-hotkey": "0.1.6",
-    "@slate-fork/slate-dev-environment": "^0.2.2"
+    "@slate-fork/slate-dev-environment": "^0.2.2",
+    "is-hotkey": "0.1.6"
   },
   "scripts": {
     "clean": "rm -rf ./dist ./lib ./node_modules"
