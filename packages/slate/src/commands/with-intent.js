@@ -266,7 +266,7 @@ Commands.insertFragment = (editor, fragment) => {
   // Either startText is still here, or we want the first un-previously known text
   const startText = document.getNode(start.key) || newTexts.first()
   // We want the last un-previously known text
-  const endText = newTexts.last() || startText
+  let endText = newTexts.last() || startText
 
   if (startText === endText) {
     editor.moveTo(endText.key, fragmentLength)
@@ -275,20 +275,20 @@ Commands.insertFragment = (editor, fragment) => {
 
   // This code causes the selection on paste to miss newlines at the end of the paste
   // Just disabling it seems to fix the problem though?
-  // // Everything will be calculated relative to the first common ancestor to optimize speed
-  // const parent = document.getCommonAncestor(startText.key, endText.key)
+  // Everything will be calculated relative to the first common ancestor to optimize speed
+  const parent = document.getCommonAncestor(startText.key, endText.key)
 
-  // const startOffset =
-  //   parent.getOffset(startText.key) +
-  //   (start.key === startText.key ? start.offset : 0)
+  const startOffset =
+    parent.getOffset(startText.key) +
+    (start.key === startText.key ? start.offset : 0)
 
-  // // endText might not be the last un-previously known text node, so we precisely pick it by offset
-  // endText = parent.getTextAtOffset(startOffset + fragmentLength - 1) || endText
+  // endText might not be the last un-previously known text node, so we precisely pick it by offset
+  endText = parent.getTextAtOffset(startOffset + fragmentLength - 1) || endText
 
-  // editor.moveTo(
-  //   endText.key,
-  //   startOffset + fragmentLength - parent.getOffset(endText.key)
-  // )
+  editor.moveTo(
+    endText.key,
+    startOffset + fragmentLength - parent.getOffset(endText.key)
+  )
 }
 
 /**
