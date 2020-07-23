@@ -1,7 +1,7 @@
 {
   "name": "@slate-fork/slate-base64-serializer",
   "description": "A Base64 serializer for Slate editors.",
-  "version": "0.2.116",
+  "version": "0.2.117",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "@slate-fork/slate": ">=0.32.0"
   },
   "devDependencies": {
-    "@slate-fork/slate": "^0.47.13",
+    "@slate-fork/slate": "^0.47.14",
     "mocha": "^2.5.3"
   },
   "dependencies": {
