@@ -171,8 +171,26 @@ function CompositionManager(editor) {
     debug('applyDiff')
     const { diff } = last
     if (diff == null) return
+
     debug('applyDiff:run')
+
     const { document } = editor.value
+
+    if (diff.insertText && diff.start === diff.end) {
+      const offset = diff.start + diff.insertText.length
+
+      // The insertTextByPath command is faster than the code below, if the diff.start
+      // and diff.end coordinates are the same, we can safely just insert the text
+      editor
+        .insertTextByPath(
+          diff.path,
+          diff.start,
+          diff.insertText.replace(/[\uFEFF\b]/g, ''),
+          null
+        )
+        .moveTo(diff.path, offset)
+      return
+    }
 
     let entire = editor.value.selection
       .moveAnchorTo(diff.path, diff.start)
@@ -182,13 +200,13 @@ function CompositionManager(editor) {
 
     // Determine new cursor offset
     if (diff.insertText) {
-      const offset = diff.end + diff.insertText.length
+      const textLength = diff.insertText.length
+      const offset = diff.start + textLength
 
       editor
         .insertTextAtRange(entire, diff.insertText)
         // Move cursor to new position
         .moveTo(diff.path, offset)
-        .restoreDOM()
     } else {
       const deletionLength = diff.end - diff.start
       const offset = diff.end - deletionLength
@@ -323,8 +341,22 @@ function CompositionManager(editor) {
   function flushAction(mutations) {
     debug('flushAction', mutations.length, mutations)
 
-    // If there is an expanded collection, delete it
-    if (last.range && !last.range.isCollapsed) {
+    if (mutations.every(mutation => mutation.type === 'characterData')) {
+      // Handle text updates
+      mutations.forEach(mutation => resolveDOMNode(mutation.target.parentNode))
+
+      // Apply diff
+      applyDiff()
+      clearAction()
+      return
+    }
+
+    // If there is an expanded selection, delete it
+    if (
+      last.range &&
+      !last.range.isCollapsed &&
+      (mutations.length > 1 || mutations[0].type !== 'characterData')
+    ) {
       renderSync(editor, () => {
         editor
           .select(last.range)
@@ -374,17 +406,7 @@ function CompositionManager(editor) {
 
     const firstMutation = mutations[0]
 
-    if (firstMutation.type === 'characterData') {
-      // Handle text update
-      resolveDOMNode(firstMutation.target.parentNode)
-
-      // Apply diff asynchronously
-      // TODO: Ideally this would be debounced on a short timeout,
-      // as this approach will is probably inefficient
-      renderSync(editor, () => {
-        applyDiff()
-      })
-    } else if (firstMutation.type === 'childList') {
+    if (firstMutation.type === 'childList') {
       if (firstMutation.removedNodes.length > 0) {
         if (mutations.length === 1) {
           removeNode(firstMutation.removedNodes[0])
