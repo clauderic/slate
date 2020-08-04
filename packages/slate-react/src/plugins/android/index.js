@@ -41,22 +41,6 @@ function AndroidPlugin({ editor }) {
   const observer = new CompositionManager(editor)
 
   /**
-   * handle `onCompositionStart`
-   */
-
-  function onCompositionStart() {
-    observer.onCompositionStart()
-  }
-
-  /**
-   * handle `onCompositionEnd`
-   */
-
-  function onCompositionEnd() {
-    observer.onCompositionEnd()
-  }
-
-  /**
    * handle `onSelect`
    *
    * @param {Event} event
@@ -133,8 +117,6 @@ function AndroidPlugin({ editor }) {
     onComponentDidMount,
     onComponentDidUpdate,
     onComponentWillUnmount,
-    onCompositionEnd,
-    onCompositionStart,
     onFocus,
     onRender,
     onSelect,
