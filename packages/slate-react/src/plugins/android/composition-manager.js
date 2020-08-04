@@ -116,6 +116,8 @@ function CompositionManager(editor) {
 
     if (last.rootEl === rootEl) return
 
+    disconnect()
+
     debug('connect:run')
 
     win = getWindow(rootEl)
