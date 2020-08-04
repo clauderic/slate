@@ -136,7 +136,7 @@ function CompositionManager(editor) {
   }
 
   function clearDiff() {
-    debug('clearDIff')
+    debug('clearDiff')
     last.diff = null
   }
 
