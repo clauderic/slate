@@ -636,7 +636,6 @@ function CompositionManager(editor) {
     clearDiff,
     connect,
     disconnect,
-    onKeyDown: startAction,
     onCompositionStart,
     onCompositionEnd,
     onSelect,
