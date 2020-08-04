@@ -636,20 +636,7 @@ function CompositionManager(editor) {
         range: range.toJS(),
       })
 
-      // If the `domSelection` has moved into a new node, then reconcile with
-      // `applyDiff`
-      if (
-        domSelection.isCollapsed &&
-        last.node !== domSelection.anchorNode &&
-        last.diff != null
-      ) {
-        debug('onSelect:applyDiff', last.diff)
-        applyDiff()
-        editor.select(range)
-        clearAction()
-      } else {
-        editor.select(range)
-      }
+      editor.select(range)
 
       last.range = range
       last.node = domSelection.anchorNode
