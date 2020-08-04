@@ -94,11 +94,7 @@ function AndroidPlugin({ editor }) {
    */
 
   function onRender() {
-    observer.disconnect()
-
-    // We don't want the `diff` from a previous render to apply to a
-    // potentially different value (e.g. when we switch examples)
-    observer.clearDiff()
+    observer.connect()
   }
 
   /**
