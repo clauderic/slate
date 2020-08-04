@@ -176,45 +176,33 @@ function CompositionManager(editor) {
 
     const { document } = editor.value
 
+    // The insertTextByPath command is faster than the code below, if the diff.start
+    // and diff.end coordinates are the same, we can safely just insert the text
     if (diff.insertText && diff.start === diff.end) {
-      const offset = diff.start + diff.insertText.length
-
-      // The insertTextByPath command is faster than the code below, if the diff.start
-      // and diff.end coordinates are the same, we can safely just insert the text
-      editor
-        .insertTextByPath(
-          diff.path,
-          diff.start,
-          diff.insertText.replace(/[\uFEFF\b]/g, ''),
-          null
-        )
-        .moveTo(diff.path, offset)
-      return
-    }
-
-    let entire = editor.value.selection
-      .moveAnchorTo(diff.path, diff.start)
-      .moveFocusTo(diff.path, diff.end)
-
-    entire = document.resolveRange(entire)
-
-    // Determine new cursor offset
-    if (diff.insertText) {
-      const textLength = diff.insertText.length
-      const offset = diff.start + textLength
-
-      editor
-        .insertTextAtRange(entire, diff.insertText)
-        // Move cursor to new position
-        .moveTo(diff.path, offset)
+      editor.insertTextByPath(diff.path, diff.start, diff.insertText, null)
     } else {
-      const deletionLength = diff.end - diff.start
-      const offset = diff.end - deletionLength
+      let entire = editor.value.selection
+        .moveAnchorTo(diff.path, diff.start)
+        .moveFocusTo(diff.path, diff.end)
 
-      editor
-        .deleteBackwardAtRange(entire, deletionLength)
-        .moveTo(diff.path, offset)
+      entire = document.resolveRange(entire)
+
+      // Determine new cursor offset
+      if (diff.insertText) {
+        editor.insertTextAtRange(entire, diff.insertText)
+      } else {
+        const deletionLength = diff.end - diff.start
+
+        editor.deleteBackwardAtRange(entire, deletionLength)
+      }
     }
+
+    const { anchorOffset, focusOffset } = window.getSelection()
+
+    // Update Slate's representation of the selection to match the native selection
+    editor
+      .moveAnchorTo(diff.path, anchorOffset)
+      .moveFocusTo(diff.path, focusOffset)
   }
 
   /**
