@@ -405,12 +405,23 @@ function CompositionManager(editor) {
    */
 
   function resolveDOMNode(domNode) {
+    if (!domNode) {
+      debug('resolveDOMNode failed because domNode was not present')
+      return
+    }
+
     debug('resolveDOMNode')
 
     const { value } = editor
     const { document } = value
 
     const dataElement = domNode.closest(`[data-key]`)
+
+    if (!dataElement) {
+      debug('resolveDOMNode failed because dataElement was not present')
+      return
+    }
+
     const key = dataElement.dataset.key
     const path = document.getPath(key)
     const block = document.getClosestBlock(key)
