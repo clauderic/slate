@@ -181,6 +181,7 @@ function CompositionManager(editor) {
     debug('applyDiff:run')
 
     const { document } = editor.value
+    const { anchorOffset, focusOffset } = window.getSelection()
 
     // The insertTextByPath command is faster than the code below, if the diff.start
     // and diff.end coordinates are the same, we can safely just insert the text
@@ -202,6 +203,11 @@ function CompositionManager(editor) {
         editor.deleteBackwardAtRange(entire, deletionLength)
       }
     }
+
+    // Update Slate's representation of the selection to match the native selection
+    editor
+      .moveAnchorTo(diff.path, anchorOffset)
+      .moveFocusTo(diff.path, focusOffset)
   }
 
   /**
@@ -545,6 +551,7 @@ function CompositionManager(editor) {
     // Don't capture the last selection if the selection was made during the
     // flushing of DOM mutations. This means it is all part of one user action.
     if (isFlushing) return
+    if (isUserActionPerformed) return
 
     onSelectTimeoutId = window.requestAnimationFrame(() => {
       debug('onSelect:save-selection')
