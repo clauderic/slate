@@ -97,6 +97,26 @@ function AndroidPlugin({ editor }) {
     observer.connect()
   }
 
+  function onKeyDown() {
+    observer.setUserActionPerformed()
+  }
+
+  /**
+   * handle `onCommand`
+   *
+   * @param {Command} command
+   * @param {Editor} editor
+   * @param {Function} next
+   */
+
+  function onCommand(command, _editor, next) {
+    if (command.type === 'clearUserActionPerformed') {
+      observer.clearUserActionPerformed()
+    }
+
+    next()
+  }
+
   /**
    * handle `onFocus`
    *
@@ -157,10 +177,12 @@ function AndroidPlugin({ editor }) {
   return {
     onBlur,
     onPaste,
+    onCommand,
     onComponentDidMount,
     onComponentDidUpdate,
     onComponentWillUnmount,
     onFocus,
+    onKeyDown,
     onRender,
     onSelect,
   }

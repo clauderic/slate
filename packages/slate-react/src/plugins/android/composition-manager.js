@@ -92,6 +92,8 @@ function CompositionManager(editor) {
 
   let win = null
 
+  let isUserActionPerformed = false
+
   /**
    * Object that keeps track of the most recent state
    *
@@ -110,15 +112,17 @@ function CompositionManager(editor) {
    */
 
   function connect() {
-    debug('connect', { rootEl })
-
     const rootEl = editor.findDOMNode([])
+
+    debug('connect:try')
 
     if (last.rootEl === rootEl) return
 
-    disconnect()
+    debug('connect:run', { rootEl, lastRootEl: last.rootEl })
 
-    debug('connect:run')
+    if (last.rootEl !== null) {
+      disconnect()
+    }
 
     win = getWindow(rootEl)
 
@@ -129,6 +133,8 @@ function CompositionManager(editor) {
       subtree: true,
       characterDataOldValue: true,
     })
+
+    last.rootEl = rootEl
   }
 
   function disconnect() {
@@ -168,7 +174,7 @@ function CompositionManager(editor) {
    */
 
   function applyDiff() {
-    debug('applyDiff')
+    debug('applyDiff:try')
     const { diff } = last
     if (diff == null) return
 
@@ -315,6 +321,8 @@ function CompositionManager(editor) {
    */
 
   function flush(mutations) {
+    if (!isUserActionPerformed) return
+
     debug('flush')
     bufferedMutations.push(...mutations)
     startAction()
@@ -499,74 +507,27 @@ function CompositionManager(editor) {
   }
 
   /**
-   * handle `onCompositionStart`
+   * Mark the beginning of a user action
    */
 
-  function onCompositionStart() {
-    debug('onCompositionStart')
+  function setUserActionPerformed() {
+    if (isUserActionPerformed) return
+
+    debug('userActionPerformed')
+
+    isUserActionPerformed = true
   }
 
   /**
-   * handle `onCompositionEnd`
+   * Mark the end of a user action
    */
 
-  function onCompositionEnd() {
-    debug('onCompositionEnd')
+  function clearUserActionPerformed() {
+    if (!isUserActionPerformed) return
 
-    /**
-     * The timing on the `setTimeout` with `20` ms is sensitive.
-     *
-     * It cannot use `requestAnimationFrame` because it is too short.
-     *
-     * Android 9, for example, when you type `it ` the space will first trigger
-     * a `compositionEnd` for the `it` part before the mutation for the ` `.
-     * This means that we end up with `it` if we trigger too soon because it
-     * is on the wrong value.
-     */
+    debug('clearUserActionPerformed')
 
-    window.setTimeout(() => {
-      if (last.diff) {
-        debug('onCompositionEnd:applyDiff')
-
-        renderSync(editor, () => {
-          applyDiff()
-
-          const domRange = win.getSelection().getRangeAt(0)
-          const domText = domRange.startContainer.textContent
-          const offset = domRange.startOffset
-
-          const fix = fixTextAndOffset(domText, offset)
-
-          const range = editor
-            .findRange({
-              anchorNode: domRange.startContainer,
-              anchorOffset: 0,
-              focusNode: domRange.startContainer,
-              focusOffset: 0,
-              isCollapsed: true,
-            })
-            .moveTo(fix.offset)
-
-          /**
-           * We must call `restoreDOM` even though this is applying a `diff` which
-           * should not require it. But if you type `it me. no.` on a blank line
-           * with a block following it, the next line will merge with the this
-           * line. A mysterious `keydown` with `input` of backspace appears in the
-           * event stream which the user not React caused.
-           *
-           * `focus` is required as well because otherwise we lose focus on hitting
-           * `enter` in such a scenario.
-           */
-
-          editor
-            .select(range)
-            .focus()
-            .restoreDOM()
-        })
-      }
-
-      clearAction()
-    }, 20)
+    isUserActionPerformed = false
   }
 
   /**
@@ -633,11 +594,11 @@ function CompositionManager(editor) {
 
   return {
     clearDiff,
+    clearUserActionPerformed,
     connect,
     disconnect,
-    onCompositionStart,
-    onCompositionEnd,
     onSelect,
+    setUserActionPerformed,
   }
 }
 
