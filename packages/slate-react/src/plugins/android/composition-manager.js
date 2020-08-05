@@ -202,13 +202,6 @@ function CompositionManager(editor) {
         editor.deleteBackwardAtRange(entire, deletionLength)
       }
     }
-
-    const { anchorOffset, focusOffset } = window.getSelection()
-
-    // Update Slate's representation of the selection to match the native selection
-    editor
-      .moveAnchorTo(diff.path, anchorOffset)
-      .moveFocusTo(diff.path, focusOffset)
   }
 
   /**
