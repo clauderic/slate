@@ -88,11 +88,12 @@ function CompositionManager(editor) {
    * @type {MutationObserver}
    */
 
-  const observer = new window.MutationObserver(flush)
+  const observer = new window.MutationObserver(flushMutations)
 
   let win = null
 
   let isUserActionPerformed = false
+  let preventNextSelectionUpdate = false
 
   /**
    * Object that keeps track of the most recent state
@@ -319,12 +320,72 @@ function CompositionManager(editor) {
    * @param {MutationList} mutations
    */
 
-  function flush(mutations) {
-    if (!isUserActionPerformed) return
-
+  function flushMutations(mutations) {
     debug('flush')
     bufferedMutations.push(...mutations)
     startAction()
+  }
+
+
+  /**
+   * Handle input flush
+   *
+   * @param {queuedInput} array of queued input actions
+   */
+
+  function flushInput(queuedInput) {
+    const firstAction = queuedInput[0]
+    const mutations = bufferedMutations
+
+    if (queuedInput.length === 1) {
+      switch (firstAction.inputType) {
+        case 'deleteContentBackward':
+          editor.deleteBackward().restoreDOM()
+          break
+        case 'insertLineBreak':
+          const initialBlock = editor.value.blocks.first()
+
+          editor.splitBlock().restoreDOM()
+
+          const currentBlock = editor.value.blocks.first()
+
+          if (initialBlock.key === currentBlock.key) {
+            editor.moveToStartOfNextBlock()
+          }
+
+          break
+        default:
+          setUserActionPerformed()
+      }
+    } else if (
+      firstAction.inputType === 'deleteContentBackward' &&
+      !mutations.every(mutation => mutation.type === 'characterData')
+    ) {
+      preventNextSelectionUpdate = true
+
+      const insertText = queuedInput.reduce((acc, input) => {
+        if (input.inputType === 'insertText') {
+          return acc + input.data
+        }
+
+        return acc
+      }, '')
+
+      debug('Edge case detected', { insertText, queuedInput, mutations })
+
+      if (insertText === ' ') {
+        editor.insertText(insertText)
+      } else {
+        const path = editor.value.selection.anchor.path
+
+        editor.setTextByPath(path, insertText, null)
+      }
+
+      // Needed to avoid issues where the DOM differs from what React expects
+      editor.restoreDOM()
+    } else {
+      setUserActionPerformed()
+    }
   }
 
   /**
@@ -334,15 +395,29 @@ function CompositionManager(editor) {
    */
 
   function flushAction(mutations) {
+    if (!isUserActionPerformed) {
+      return
+    }
+
     debug('flushAction', mutations.length, mutations)
 
     if (mutations.every(mutation => mutation.type === 'characterData')) {
       // Handle text updates
-      mutations.forEach(mutation => resolveDOMNode(mutation.target.parentNode))
+      mutations.reduce((previousTarget, mutation) => {
+        const target = mutation.target.parentNode
 
-      // Apply diff
-      applyDiff()
-      clearAction()
+        if (previousTarget !== target) {
+          // Detect text changes
+          resolveDOMNode(target)
+
+          // Apply diff
+          applyDiff()
+          clearAction()
+        }
+
+        return target
+      }, null)
+
       return
     }
 
@@ -375,8 +450,9 @@ function CompositionManager(editor) {
         if (
           addedNode.nodeType === window.Node.TEXT_NODE &&
           addedNode.textContent === '\n'
-        )
+        ) {
           return true
+        }
 
         // If an element is created with a key that matches a block in our
         // document, that means the mutation is splitting an existing block
@@ -411,6 +487,12 @@ function CompositionManager(editor) {
       } else if (firstMutation.addedNodes.length > 0) {
         splitBlock()
       }
+    } else if (firstMutation.type === 'characterData') {
+      resolveDOMNode(firstMutation.target.parentNode)
+
+      // Apply diff
+      applyDiff()
+      clearAction()
     }
   }
 
@@ -539,7 +621,18 @@ function CompositionManager(editor) {
    */
 
   function onSelect(event) {
-    debug('onSelect:try')
+    if (preventNextSelectionUpdate) {
+      event.preventDefault()
+
+      debug('onSelect:preventSelectionUpdate')
+
+      window.setTimeout(() => {
+        preventNextSelectionUpdate = false
+      }, 200)
+      return
+    }
+
+    debug('onSelect:try', getWindow(event.target).getSelection())
 
     // Event can be Synthetic React or native. Grab only the native one so
     // that we don't have to call `event.perist` for performance.
@@ -588,7 +681,6 @@ function CompositionManager(editor) {
       editor.select(range)
 
       last.range = range
-      last.node = domSelection.anchorNode
     })
   }
 
@@ -597,6 +689,7 @@ function CompositionManager(editor) {
     clearUserActionPerformed,
     connect,
     disconnect,
+    flushInput,
     onSelect,
     setUserActionPerformed,
   }

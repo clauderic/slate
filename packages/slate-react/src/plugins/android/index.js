@@ -58,6 +58,7 @@ function AndroidPlugin({ editor }) {
   function onSelect(event) {
     const window = getWindow(event.target)
     fixSelectionInZeroWidthBlock(window)
+
     observer.onSelect(event)
   }
 
@@ -97,7 +98,43 @@ function AndroidPlugin({ editor }) {
     observer.connect()
   }
 
-  function onKeyDown() {
+  let queuedActions = []
+  let animationFrameId = null
+
+  function onInput(event) {
+    const nativeEvent = event.nativeEvent || event
+    const { data, inputType } = nativeEvent
+
+    if (inputType) {
+      debug(nativeEvent.type, inputType, { data, nativeEvent })
+    }
+
+    if (
+      !inputType ||
+      queuedActions.find(action => action.inputType === inputType)
+    ) {
+      return
+    }
+
+    queuedActions.push({ inputType, data })
+
+    if (animationFrameId) {
+      window.cancelAnimationFrame(animationFrameId)
+      animationFrameId = null
+    }
+
+    animationFrameId = window.requestAnimationFrame(flushInput)
+  }
+
+  function flushInput() {
+    debug('flushInput', queuedActions)
+
+    observer.flushInput(queuedActions)
+
+    queuedActions = []
+  }
+
+  function onCut() {
     observer.setUserActionPerformed()
   }
 
@@ -176,13 +213,15 @@ function AndroidPlugin({ editor }) {
 
   return {
     onBlur,
+    onCut,
     onPaste,
     onCommand,
     onComponentDidMount,
     onComponentDidUpdate,
     onComponentWillUnmount,
     onFocus,
-    onKeyDown,
+    onBeforeInput: onInput,
+    onInput,
     onRender,
     onSelect,
   }
