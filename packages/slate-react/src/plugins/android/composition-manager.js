@@ -343,12 +343,17 @@ function CompositionManager(editor) {
       firstAction.data &&
       (!everyMutationTypeIs(mutations, 'characterData') || mutations.length > 1)
     ) {
+      const insertText = getQueuedInputText(queuedInput, [
+        'insertCompositionText',
+        'insertText',
+      ])
+
       if (editor.value.selection.isCollapsed) {
-        insertCompositionText(editor, firstAction.data)
+        insertCompositionText(editor, insertText)
       } else {
         editor
           .deleteBackward()
-          .insertText(firstAction.data)
+          .insertText(insertText)
           .restoreDOM()
       }
     } else if (queuedInput.length === 1) {
@@ -368,6 +373,14 @@ function CompositionManager(editor) {
           }
 
           break
+        case 'insertText':
+          const insertText = firstAction.data
+
+          if (insertText && mutations.length > 1) {
+            editor.insertText(insertText).restoreDOM()
+            break
+          }
+
         default:
           setUserActionPerformed()
       }
@@ -377,13 +390,7 @@ function CompositionManager(editor) {
     ) {
       preventNextSelectionUpdate = true
 
-      const insertText = queuedInput.reduce((acc, input) => {
-        if (input.inputType === 'insertText') {
-          return acc + input.data
-        }
-
-        return acc
-      }, '')
+      const insertText = getQueuedInputText(queuedInput, ['insertText'])
 
       debug('Edge case detected', { insertText, queuedInput, mutations })
 
@@ -720,6 +727,16 @@ function normalizeDOMSelection(selection) {
 
 function everyMutationTypeIs(mutations, type) {
   return mutations.every(mutation => mutation.type === type)
+}
+
+function getQueuedInputText(queuedInput, inputTypes) {
+  return queuedInput.reduce((acc, input) => {
+    if (inputTypes.includes(input.inputType)) {
+      return acc + input.data
+    }
+
+    return acc
+  }, '')
 }
 
 export default CompositionManager
