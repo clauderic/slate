@@ -396,14 +396,11 @@ function CompositionManager(editor) {
 
       if (insertText === ' ') {
         editor.insertText(insertText)
+        // Needed to avoid issues where the DOM differs from what React expects
+        editor.restoreDOM()
       } else {
-        const path = editor.value.selection.anchor.path
-
-        editor.setTextByPath(path, insertText, null)
+        insertCompositionText(editor, insertText)
       }
-
-      // Needed to avoid issues where the DOM differs from what React expects
-      editor.restoreDOM()
     } else {
       setUserActionPerformed()
     }
