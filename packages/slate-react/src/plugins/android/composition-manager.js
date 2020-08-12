@@ -2,6 +2,7 @@ import Debug from 'debug'
 import getWindow from 'get-window'
 import ReactDOM from 'react-dom'
 import diffText from './diff-text'
+import insertCompositionText from './insert-composition-text'
 
 /**
  * @type {Debug}
@@ -142,6 +143,7 @@ function CompositionManager(editor) {
     debug('disconnect')
     observer.disconnect()
     last.rootEl = null
+    isUserActionPerformed = false
   }
 
   function clearDiff() {
@@ -326,7 +328,6 @@ function CompositionManager(editor) {
     startAction()
   }
 
-
   /**
    * Handle input flush
    *
@@ -337,7 +338,14 @@ function CompositionManager(editor) {
     const firstAction = queuedInput[0]
     const mutations = bufferedMutations
 
-    if (queuedInput.length === 1) {
+    if (
+      firstAction.inputType === 'insertCompositionText' &&
+      firstAction.data &&
+      editor.value.selection.isCollapsed &&
+      (!everyMutationTypeIs(mutations, 'characterData') || mutations.length > 1)
+    ) {
+      insertCompositionText(editor, firstAction.data)
+    } else if (queuedInput.length === 1) {
       switch (firstAction.inputType) {
         case 'deleteContentBackward':
           editor.deleteBackward().restoreDOM()
@@ -359,7 +367,7 @@ function CompositionManager(editor) {
       }
     } else if (
       firstAction.inputType === 'deleteContentBackward' &&
-      !mutations.every(mutation => mutation.type === 'characterData')
+      !everyMutationTypeIs(mutations, 'characterData')
     ) {
       preventNextSelectionUpdate = true
 
@@ -702,6 +710,10 @@ function normalizeDOMSelection(selection) {
     focusNode: selection.focusNode,
     focusOffset: selection.focusOffset,
   }
+}
+
+function everyMutationTypeIs(mutations, type) {
+  return mutations.every(mutation => mutation.type === type)
 }
 
 export default CompositionManager
