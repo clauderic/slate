@@ -341,10 +341,16 @@ function CompositionManager(editor) {
     if (
       firstAction.inputType === 'insertCompositionText' &&
       firstAction.data &&
-      editor.value.selection.isCollapsed &&
       (!everyMutationTypeIs(mutations, 'characterData') || mutations.length > 1)
     ) {
-      insertCompositionText(editor, firstAction.data)
+      if (editor.value.selection.isCollapsed) {
+        insertCompositionText(editor, firstAction.data)
+      } else {
+        editor
+          .deleteBackward()
+          .insertText(firstAction.data)
+          .restoreDOM()
+      }
     } else if (queuedInput.length === 1) {
       switch (firstAction.inputType) {
         case 'deleteContentBackward':
