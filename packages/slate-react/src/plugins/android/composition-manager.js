@@ -386,7 +386,7 @@ function CompositionManager(editor) {
       }
     } else if (
       firstAction.inputType === 'deleteContentBackward' &&
-      !everyMutationTypeIs(mutations, 'characterData')
+      queuedInput.some(input => input.inputType === 'insertText')
     ) {
       preventNextSelectionUpdate = true
 
