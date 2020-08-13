@@ -18,18 +18,26 @@ const debug = Debug('slate:composition-manager')
 
 const ZERO_WIDTH_SPACE = String.fromCharCode(65279)
 
-/**
- * https://github.com/facebook/draft-js/commit/cda13cb8ff9c896cdb9ff832d1edeaa470d3b871
- */
-
-const flushControlled =
-  ReactDOM.unstable_flushControlled || ReactDOM.flushControlled
+// Wrap handlers in `flushControlled`. In sync mode, this is
+// effectively a no-op. In async mode, this ensures all updates scheduled
+// inside the handler are flushed before React yields to the browser.
+const flushControlled = ReactDOM.unstable_flushControlled
 
 function renderSync(editor, fn) {
-  flushControlled(() => {
+  const handler = () => {
     fn()
     editor.controller.flush()
-  })
+  }
+
+  if (typeof flushControlled === 'function') {
+    /**
+     * https://github.com/facebook/draft-js/commit/cda13cb8ff9c896cdb9ff832d1edeaa470d3b871
+     */
+
+    flushControlled(handler)
+  } else {
+    handler()
+  }
 }
 
 /**
