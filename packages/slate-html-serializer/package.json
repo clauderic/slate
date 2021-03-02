@@ -15,9 +15,11 @@
   "module": "lib/slate-html-serializer.es.js",
   "umd": "dist/slate-html-serializer.js",
   "umdMin": "dist/slate-html-serializer.min.js",
+  "typings": "index.d.ts",
   "files": [
     "dist/",
-    "lib/"
+    "lib/",
+    "index.d.ts"
   ],
   "dependencies": {
     "type-of": "^2.0.1"

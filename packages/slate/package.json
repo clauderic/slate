@@ -15,9 +15,11 @@
   "module": "lib/slate.es.js",
   "umd": "dist/slate.js",
   "umdMin": "dist/slate.min.js",
+  "typings": "index.d.ts",
   "files": [
     "dist/",
-    "lib/"
+    "lib/",
+    "index.d.ts"
   ],
   "dependencies": {
     "debug": "^3.1.0",

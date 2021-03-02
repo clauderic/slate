@@ -15,9 +15,11 @@
   "module": "lib/slate-react.es.js",
   "umd": "dist/slate-react.js",
   "umdMin": "dist/slate-react.min.js",
+  "typings": "index.d.ts",
   "files": [
     "dist/",
-    "lib/"
+    "lib/",
+    "index.d.ts"
   ],
   "dependencies": {
     "@slate-fork/slate-base64-serializer": "^0.2.117",
