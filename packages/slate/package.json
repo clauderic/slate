@@ -1,7 +1,7 @@
 {
   "name": "@slate-fork/slate",
   "description": "A completely customizable framework for building rich text editors.",
-  "version": "0.47.14",
+  "version": "0.47.15",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@slate-fork/slate-dev-test-utils": "^0.0.1",
-    "@slate-fork/slate-hyperscript": "^0.13.14"
+    "@slate-fork/slate-hyperscript": "^0.13.15"
   },
   "scripts": {
     "clean": "rm -rf ./dist ./lib ./node_modules"

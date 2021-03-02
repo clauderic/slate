@@ -1,7 +1,7 @@
 {
   "name": "@slate-fork/slate-react",
   "description": "A set of React components for building completely customizable rich-text editors.",
-  "version": "0.22.24",
+  "version": "0.22.25",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -22,12 +22,12 @@
     "index.d.ts"
   ],
   "dependencies": {
-    "@slate-fork/slate-base64-serializer": "^0.2.117",
+    "@slate-fork/slate-base64-serializer": "^0.2.118",
     "@slate-fork/slate-dev-environment": "^0.2.2",
     "@slate-fork/slate-hotkeys": "^0.2.13",
     "@slate-fork/slate-plain-serializer": "^0.7.15",
-    "@slate-fork/slate-prop-types": "^0.5.47",
-    "@slate-fork/slate-react-placeholder": "^0.2.14",
+    "@slate-fork/slate-prop-types": "^0.5.48",
+    "@slate-fork/slate-react-placeholder": "^0.2.15",
     "debug": "^3.1.0",
     "get-window": "^1.1.1",
     "is-window": "^1.0.2",
@@ -46,8 +46,8 @@
     "react-dom": ">=16.6.0"
   },
   "devDependencies": {
-    "@slate-fork/slate": "^0.47.14",
-    "@slate-fork/slate-hyperscript": "^0.13.14",
+    "@slate-fork/slate": "^0.47.15",
+    "@slate-fork/slate-hyperscript": "^0.13.15",
     "immutable": "^3.8.1",
     "mocha": "^2.5.3",
     "react-test-renderer": "^16.6.3"
